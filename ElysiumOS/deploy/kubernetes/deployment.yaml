@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: elysiumos-deployment
+  labels:
+    app: elysiumos
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: elysiumos
+  template:
+    metadata:
+      labels:
+        app: elysiumos
+    spec:
+      containers:
+      - name: elysiumos
+        image: elysiumos:latest
+        ports:
+        - containerPort: 8080
+        env:
+        - name: SPRING_PROFILES_ACTIVE
+          value: "prod"
+        readinessProbe:
+          httpGet:
+            path: /actuator/health
+            port: 8080
+        livenessProbe:
+          httpGet:
+            path: /actuator/health
+            port: 8080
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "500m"
+          limits:
+            memory: "1Gi"
+            cpu: "1000m"
+      imagePullSecrets:
+      - name: regcred
+      serviceAccountName: elysiumos-service-account
