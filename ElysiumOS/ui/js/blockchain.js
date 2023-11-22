@@ -1,73 +1,71 @@
-// blockchain.js - Handles interactions with the Arbitrum blockchain for Elysium OS
+// blockchain.js - Handles blockchain interactions for Elysium OS
 
 const Web3 = require('web3');
-const ElysiumTokenContract = require('../blockchain/contracts/ElysiumToken.sol');
+const web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'));
 
-// Initialize web3 instance connected to the Arbitrum network
-const web3 = new Web3(new Web3.providers.HttpProvider('https://arbitrum-rinkeby.infura.io/v3/YOUR_INFURA_PROJECT_ID'));
+// Shared variables
+let smartContractAddress;
+let inGameCurrencyBalance;
+let blockchainTransactionData;
 
-// Elysium Token contract instance
-const elysiumToken = new web3.eth.Contract(ElysiumTokenContract.abi, 'CONTRACT_ADDRESS');
+// Initialize smart contract
+const contractABI = require('./contractABI.json');
+const contract = new web3.eth.Contract(contractABI, smartContractAddress);
 
-// Function to initiate a blockchain transaction
-function initiateBlockchainTransaction(fromAddress, toAddress, amount, privateKey) {
-  const transactionObject = {
-    from: fromAddress,
-    to: toAddress,
-    value: web3.utils.toWei(amount.toString(), 'ether'),
-    gas: 3000000 // Set gas limit
-  };
-
-  return web3.eth.accounts.signTransaction(transactionObject, privateKey)
-    .then(signedTx => web3.eth.sendSignedTransaction(signedTx.rawTransaction))
-    .then(receipt => {
-      console.log('Transaction successful with hash:', receipt.transactionHash);
-      return receipt.transactionHash;
+// Function to check user's in-game currency balance
+function checkInGameCurrency(userId) {
+  contract.methods.balanceOf(userId).call()
+    .then(balance => {
+      inGameCurrencyBalance = balance;
+      console.log(`User's in-game currency balance is: ${balance}`);
     })
-    .catch(err => {
-      console.error('Transaction failed:', err);
-      throw err;
+    .catch(error => console.error(error));
+}
+
+// Function to process in-game transactions
+function processTransaction(fromId, toId, amount, transactionData) {
+  contract.methods.transfer(fromId, toId, amount).send({ from: fromId })
+    .on('transactionHash', hash => {
+      console.log(`Transaction hash: ${hash}`);
+      blockchainTransactionData = hash;
+    })
+    .on('receipt', receipt => {
+      console.log(`Transaction receipt: ${receipt}`);
+    })
+    .on('error', error => {
+      console.error(`Transaction failed: ${error.message}`);
     });
 }
 
-// Function to deploy a smart contract
-function deploySmartContract(contractData, fromAddress, privateKey) {
-  const deployTx = {
-    data: contractData,
-    arguments: [], // Constructor arguments if any
-    from: fromAddress,
-    gas: 3000000 // Set gas limit
-  };
-
-  return web3.eth.accounts.signTransaction(deployTx, privateKey)
-    .then(signedTx => web3.eth.sendSignedTransaction(signedTx.rawTransaction))
-    .then(receipt => {
-      console.log('Contract deployed at address:', receipt.contractAddress);
-      return receipt.contractAddress;
+// Function to handle NFT ownership transfer
+function transferNFT(fromId, toId, tokenId) {
+  contract.methods.transferFrom(fromId, toId, tokenId).send({ from: fromId })
+    .on('transactionHash', hash => {
+      console.log(`NFT transfer transaction hash: ${hash}`);
     })
-    .catch(err => {
-      console.error('Contract deployment failed:', err);
-      throw err;
+    .on('receipt', receipt => {
+      console.log(`NFT transfer receipt: ${receipt}`);
+      // Emit event for NFT ownership change
+      document.dispatchEvent(new CustomEvent('NFTOwnershipChanged', { detail: { tokenId, fromId, toId } }));
+    })
+    .on('error', error => {
+      console.error(`NFT transfer failed: ${error.message}`);
     });
 }
 
-// Function to interact with a smart contract
-function callSmartContractFunction(contractInstance, functionName, params, fromAddress) {
-  return contractInstance.methods[functionName](...params)
-    .send({ from: fromAddress })
-    .then(receipt => {
-      console.log(`Function ${functionName} executed with transaction hash:`, receipt.transactionHash);
-      return receipt.transactionHash;
-    })
-    .catch(err => {
-      console.error(`Error executing function ${functionName}:`, err);
-      throw err;
-    });
+// Function to connect to the blockchain network
+function connectToBlockchain() {
+  web3.eth.net.isListening()
+    .then(() => console.log('Connected to the blockchain network'))
+    .catch(e => console.error('Blockchain network connection failed', e));
 }
+
+// Initialize blockchain connection on load
+connectToBlockchain();
 
 // Export functions for use in other modules
 module.exports = {
-  initiateBlockchainTransaction,
-  deploySmartContract,
-  callSmartContractFunction
+  checkInGameCurrency,
+  processTransaction,
+  transferNFT
 };

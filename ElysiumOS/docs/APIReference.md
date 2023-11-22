@@ -1,142 +1,183 @@
 # Elysium OS API Reference
 
-## Overview
-This document provides the API reference for Elysium OS, detailing the endpoints available for interacting with the system's core features: Automation Station, The Arena, and the Arbitrum Blockchain integration.
-
-## Base URL
-The base URL for all API endpoints is `https://api.elysiumos.com/v1`
+Welcome to the Elysium OS API Reference. This document provides detailed information about the APIs available in Elysium OS, allowing developers to integrate and extend the platform's capabilities.
 
 ## Authentication
-All API requests require the use of a JWT token obtained after a successful login. This token must be included in the header of every request.
 
-### POST /api/auth/login
-- Description: Authenticate a user and retrieve a token.
-- Request Body:
+### authenticateUser
+- **Endpoint**: `/api/authenticate`
+- **Method**: `POST`
+- **Description**: Authenticates a user and returns a session token.
+- **Request Body**:
   ```json
   {
-    "username": "user",
-    "password": "password"
+    "username": "string",
+    "password": "string"
   }
   ```
-- Response:
+- **Response**:
   ```json
   {
-    "token": "jwt_token"
-  }
-  ```
-
-## Automation Station
-
-### POST /api/automation/create
-- Description: Create a new automation task.
-- Request Body:
-  ```json
-  {
-    "name": "Task Name",
-    "description": "Task Description",
-    "script": "automation_script"
-  }
-  ```
-- Response:
-  ```json
-  {
-    "message": "AUTOMATION_CREATED",
-    "taskId": "task_id"
+    "userSessionToken": "string"
   }
   ```
 
-### GET /api/automation/tasks
-- Description: Retrieve a list of all automation tasks.
-- Response:
-  ```json
-  [
-    {
-      "taskId": "task_id",
-      "name": "Task Name",
-      "description": "Task Description",
-      "status": "Task Status"
-    }
-  ]
-  ```
+## AI Agents
 
-## The Arena
-
-### POST /api/arena/start
-- Description: Start a new game in The Arena.
-- Request Body:
+### initializeAI
+- **Endpoint**: `/api/ai/initialize`
+- **Method**: `POST`
+- **Description**: Initializes an AI agent for the user session.
+- **Request Headers**:
   ```json
   {
-    "gameType": "Game Type",
-    "participants": ["participant1", "participant2"]
+    "Authorization": "Bearer userSessionToken"
   }
   ```
-- Response:
+- **Response**:
   ```json
   {
-    "message": "GAME_STARTED",
-    "gameId": "game_id"
+    "aiAgentState": "object"
   }
   ```
 
-### GET /api/arena/games
-- Description: Retrieve a list of all games in The Arena.
-- Response:
+## World Management
+
+### generateWorld
+- **Endpoint**: `/api/world/generate`
+- **Method**: `POST`
+- **Description**: Generates a unique world for the user.
+- **Request Headers**:
   ```json
-  [
-    {
-      "gameId": "game_id",
-      "gameType": "Game Type",
-      "status": "Game Status"
-    }
-  ]
+  {
+    "Authorization": "Bearer userSessionToken"
+  }
+  ```
+- **Response**:
+  ```json
+  {
+    "worldCustomizationSettings": "object"
+  }
   ```
 
 ## Blockchain Integration
 
-### POST /api/blockchain/transaction
-- Description: Initiate a new blockchain transaction.
-- Request Body:
+### processTransaction
+- **Endpoint**: `/api/blockchain/transaction`
+- **Method**: `POST`
+- **Description**: Processes a blockchain transaction for in-game purchases.
+- **Request Body**:
   ```json
   {
-    "from": "sender_address",
-    "to": "recipient_address",
-    "amount": "amount",
-    "token": "ElysiumToken"
+    "fromAddress": "string",
+    "toAddress": "string",
+    "amount": "number",
+    "token": "string"
   }
   ```
-- Response:
+- **Response**:
   ```json
   {
-    "message": "BLOCKCHAIN_TRANSACTION_INITIATED",
-    "transactionId": "transaction_id"
-  }
-  ```
-
-### GET /api/blockchain/transactions
-- Description: Retrieve a list of all blockchain transactions.
-- Response:
-  ```json
-  [
-    {
-      "transactionId": "transaction_id",
-      "from": "sender_address",
-      "to": "recipient_address",
-      "amount": "amount",
-      "token": "ElysiumToken",
-      "status": "Transaction Status"
-    }
-  ]
-  ```
-
-## Error Handling
-All endpoints return a standard error format in the case of a failure.
-
-- Response:
-  ```json
-  {
-    "error": "Error Type",
-    "message": "Error Message"
+    "transactionId": "string"
   }
   ```
 
-Please refer to the individual endpoint documentation for more detailed information on request and response formats.
+## Marketplace
+
+### marketplaceSearch
+- **Endpoint**: `/api/marketplace/search`
+- **Method**: `GET`
+- **Description**: Searches the marketplace for apps and games.
+- **Query Parameters**:
+  - `query`: string
+- **Response**:
+  ```json
+  {
+    "marketplaceListings": "array"
+  }
+  ```
+
+## User Preferences
+
+### updateUserPreferences
+- **Endpoint**: `/api/user/preferences`
+- **Method**: `PUT`
+- **Description**: Updates user preferences and settings.
+- **Request Headers**:
+  ```json
+  {
+    "Authorization": "Bearer userSessionToken"
+  }
+  ```
+- **Request Body**:
+  ```json
+  {
+    "preferences": "object"
+  }
+  ```
+- **Response**:
+  ```json
+  {
+    "userPreferences": "object"
+  }
+  ```
+
+## Cloud Services
+
+### syncToCloud
+- **Endpoint**: `/api/cloud/sync`
+- **Method**: `POST`
+- **Description**: Syncs local data to the cloud.
+- **Request Headers**:
+  ```json
+  {
+    "Authorization": "Bearer userSessionToken"
+  }
+  ```
+- **Response**:
+  ```json
+  {
+    "cloudSyncStatus": "string"
+  }
+  ```
+
+## Localization
+
+### changeLanguage
+- **Endpoint**: `/api/localization/language`
+- **Method**: `PUT`
+- **Description**: Changes the language settings for the user interface.
+- **Request Body**:
+  ```json
+  {
+    "language": "string"
+  }
+  ```
+- **Response**:
+  ```json
+  {
+    "languageSettings": "object"
+  }
+  ```
+
+## Accessibility
+
+### toggleAccessibility
+- **Endpoint**: `/api/accessibility/toggle`
+- **Method**: `PUT`
+- **Description**: Toggles accessibility features on or off.
+- **Request Body**:
+  ```json
+  {
+    "feature": "string",
+    "enabled": "boolean"
+  }
+  ```
+- **Response**:
+  ```json
+  {
+    "accessibilityOptions": "object"
+  }
+  ```
+
+This API reference is part of the comprehensive documentation provided for Elysium OS. For more detailed guides and tutorials, please refer to the DeveloperDocs.md and UserGuide.md.

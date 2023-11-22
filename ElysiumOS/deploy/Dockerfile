@@ -1,9 +1,23 @@
-FROM openjdk:11-jre-slim
+# Use an official Node runtime as a parent image
+FROM node:14-slim
 
-WORKDIR /app
+# Set the working directory in the container
+WORKDIR /usr/src/app
 
-COPY ./build/ElysiumOS.jar /app/ElysiumOS.jar
+# Copy package.json and package-lock.json
+COPY package*.json ./
 
-EXPOSE 8080
+# Install any dependencies
+RUN npm install
 
-CMD ["java", "-jar", "ElysiumOS.jar"]
+# Bundle app source inside the Docker image
+COPY . .
+
+# Build the app
+RUN npm run build
+
+# Map port 3000 to the outside world (the port number should be the one your app uses)
+EXPOSE 3000
+
+# Define the command to run your app using CMD which defines your runtime
+CMD [ "node", "src/core/Kernel.js" ]

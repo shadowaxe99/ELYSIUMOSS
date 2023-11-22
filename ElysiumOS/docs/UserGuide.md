@@ -1,84 +1,84 @@
 # Elysium OS User Guide
 
-Welcome to Elysium OS, the operating system of the future where the digital and tangible worlds are not just connected—they are one. This guide will help you navigate the features of Elysium OS and harness the full potential of your digital environment.
+Welcome to Elysium OS, the future of AI-driven interaction. This guide will help you navigate the features and functionalities of Elysium OS, ensuring a seamless and secure experience.
 
 ## Getting Started
 
-To begin your journey with Elysium OS, ensure your system meets the technical requirements outlined in the `InstallationGuide.md`. Follow the installation steps to set up Elysium OS on your device.
+### Installation
+1. Download the ElysiumOS.jar file from our official website.
+2. Run the installer and follow the on-screen instructions to complete the installation.
 
-## Automation Station
+### Creating an Account
+1. Launch Elysium OS and click on `loginButton` on the main screen.
+2. Select "Create Account" and enter your details.
+3. Verify your email to activate your account.
 
-The Automation Station is your hub for creating and managing custom automations that simplify your daily tasks.
+### Logging In
+1. Enter your username and password in the provided fields.
+2. Click `loginButton` to access your dashboard.
 
-### Creating Automations
+## Navigating the Interface
 
-1. Open the Automation Station from the main menu.
-2. Select 'Create New Automation'.
-3. Define the automation parameters using the intuitive interface.
-4. Save your automation, and it will be ready to execute.
+### Main UI
+- Access the `MainUI.java` for a comprehensive view of the system.
+- Use `userProfileMenu` to manage your account settings.
 
-### Managing Robotic Assistants
+### Dashboard
+- The `Dashboard.java` provides a quick overview of your recent activities and notifications.
 
-1. Navigate to the Robotic Assistant Management panel.
-2. Here, you can assign tasks, monitor progress, and customize your assistants.
+### Settings
+- Customize your experience through `SettingsPanel.java`.
+- Adjust `languageSettings` and `accessibilityOptions` to suit your needs.
 
-## The Arena
+## Interacting with AI Agents
 
-The Arena is where your strategies come to life, blending gaming and real-world actions.
+### The Butler/Consigliere
+- Use `aiAssistantChat` to communicate with your personal AI assistant.
+- Voice commands can be issued directly through your microphone.
 
-### Engaging in 3D Worlds
+### The Arena
+- Join multiplayer games by accessing `gameArenaCanvas`.
+- View live matches and participate in events.
 
-1. Access The Arena from the main dashboard.
-2. Choose a world to explore or a game to play.
-3. Interact with the environment and other players in real-time.
+## Automation and Workflow
 
-### Hosting Competitions
+### Automation Station
+- Create and manage tasks using `automationDashboard`.
+- Automate repetitive tasks with `automationScripts`.
 
-1. Select 'Host Competition' from The Arena's menu.
-2. Set the competition parameters and invite participants.
-3. Monitor the competition and reward the victors.
+## Marketplace and Transactions
 
-## Arbitrum Blockchain Integration
+### Marketplace
+- Browse apps and services in the `marketplaceSearch`.
+- Purchase items securely with integrated payment gateways.
 
-Elysium OS integrates with the Arbitrum blockchain for secure and efficient operations.
-
-### Engaging with Smart Contracts
-
-1. Open the Blockchain Service module.
-2. Use the SmartContractManager to create or interact with smart contracts.
-3. Follow the prompts to execute blockchain transactions.
-
-### Using Elysium Tokens
-
-1. Access your wallet through the main interface.
-2. Elysium Tokens can be used for transactions and accessing premium features.
+### Blockchain Integration
+- Manage your `nftOwnershipRecord` and `inGameCurrencyBalance` through `blockchain.js`.
 
 ## Customizing Your Experience
 
-Elysium OS is designed to be highly customizable to fit your preferences.
+### Metaverse
+- Customize your avatar and environment in the `virtualWorldViewer`.
+- Interact with other users in shared virtual spaces.
 
-### Personalizing the Interface
+### Plugins
+- Enhance functionality by installing plugins through `pluginMarketplace`.
 
-1. Go to the settings menu.
-2. Choose 'Customize Interface' to change themes, layouts, and more.
+## Security and Privacy
 
-### Accessibility Features
+### Security Module
+- Your data is protected with advanced encryption, managed by `SecurityModule.java`.
+- Multi-factor authentication (MFA) and blockchain-based security are in place for your safety.
 
-1. Select 'Accessibility Options' in the settings.
-2. Adjust text sizes, color contrasts, and enable assistive technologies.
+## Support and Documentation
 
-## Support and Feedback
+### Help and Support
+- For assistance, contact our support team through the help menu in `MainUI.java`.
+- Check `SystemArchitecture.md` for a detailed overview of Elysium OS architecture.
 
-Your experience and feedback are valuable to us.
+### Developer Resources
+- Developers can refer to `DeveloperDocs.md` and `APIReference.md` for technical documentation.
 
-### Accessing Support
+## Conclusion
 
-1. Visit the 'Help Center' from the main menu.
-2. Browse the FAQs or contact our support team directly.
-
-### Providing Feedback
-
-1. Use the 'Feedback' option in the settings menu.
-2. Share your thoughts and suggestions for future updates.
-
-For more detailed information on Elysium OS's features, please refer to the `DeveloperGuide.md` and `APIReference.md`. Enjoy shaping your reality with Elysium OS!
+Elysium OS is designed to be intuitive and user-friendly. Explore the limitless possibilities and enjoy a personalized AI experience. For further information, refer to the documentation provided in the `docs/` directory. Thank you for choosing Elysium OS.

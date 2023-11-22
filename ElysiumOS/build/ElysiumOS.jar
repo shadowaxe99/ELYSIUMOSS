@@ -1,39 +1,26 @@
-As an AI, I'm unable to generate binary files such as a `.jar` directly. However, I can provide you with an example of a shell script that could be used to compile Java source code and package it into a `.jar` file, which is what the `ElysiumOS.jar` would be. This script assumes that you have the Java Development Kit (JDK) installed and that your source files are organized according to the directory structure you've provided.
+As an AI language model, I'm unable to generate binary files or executable JAR files directly. However, I can provide you with an example of a shell script that could be used to compile Java source code and package it into a JAR file, which is typically how a JAR like `ElysiumOS.jar` would be created.
 
-Here's an example of a shell script (`build.sh`) that you could use to compile the Java source code and package it into the `ElysiumOS.jar` file:
+Here's an example of a shell script that could be used to compile the Java source files and package them into a JAR:
 
 ```sh
 #!/bin/bash
 
-# Navigate to the project's root directory
-cd ElysiumOS
+# Navigate to the source directory
+cd ElysiumOS/src
 
-# Create the bin directory if it doesn't exist
-mkdir -p build
+# Compile the Java source files
+javac core/*.java automation_station/*.java arena/*.java ai/*.java user_interface/*.java utils/*.java networking/*.java database/*.java metaverse/*.java blockchain/*.java localization/*.java accessibility/*.java plugins/*.java recovery/*.java hardware/*.java cloud/*.java
 
-# Compile the Java source code
-javac -d build -sourcepath src/main/java src/main/java/ElysiumOS.java
+# Create the JAR file
+jar cvfm ../build/ElysiumOS.jar ../src/META-INF/MANIFEST.MF core/*.class automation_station/*.class arena/*.class ai/*.class user_interface/*.class utils/*.class networking/*.class database/*.class metaverse/*.class blockchain/*.class localization/*.class accessibility/*.class plugins/*.class recovery/*.class hardware/*.class cloud/*.class
 
-# Check if compilation was successful
-if [ $? -eq 0 ]; then
-    echo "Compilation successful."
+# Clean up the class files
+find . -type f -name "*.class" -delete
 
-    # Navigate to the build directory
-    cd build
-
-    # Package the compiled classes into a JAR file
-    jar cvfe ElysiumOS.jar ElysiumOS -C . .
-
-    if [ $? -eq 0 ]; then
-        echo "ElysiumOS.jar created successfully."
-    else
-        echo "Failed to create ElysiumOS.jar."
-    fi
-else
-    echo "Compilation failed."
-fi
+# Return to the original directory
+cd ../..
 ```
 
-To use this script, you would save it as `build.sh` in the root of your project directory, give it execute permissions with `chmod +x build.sh`, and then run it with `./build.sh`.
+This script assumes that there is a `META-INF/MANIFEST.MF` file in the `src` directory that specifies the main class and any other necessary manifest information. The `jar` command packages the compiled `.class` files into a JAR file, and the `find` command cleans up the `.class` files after the JAR is created.
 
-Please note that this script is a simple example and does not handle complex build processes that might be required for a real-world project like Elysium OS. For such a project, you would likely use a build automation tool like Maven or Gradle.
+Please note that this is a simplified example and may need to be adjusted based on the actual structure of your project and the specific requirements of your build process.
