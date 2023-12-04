@@ -1,4 +1,3 @@
-```java
 package arena;
 
 import java.util.HashMap;
@@ -91,4 +90,3 @@ public class GameManager {
         // TODO: Define scenario configuration parameters
     }
 }
-```

@@ -1,4 +1,3 @@
-```java
 package world3d;
 
 import javax.media.j3d.BranchGroup;
@@ -59,4 +58,3 @@ public class WorldRenderer {
         worldRenderer.renderWorld();
     }
 }
-```
