@@ -1,4 +1,3 @@
-```java
 package cloud;
 
 import utils.NetworkManager;
@@ -57,4 +56,3 @@ public class CloudSync {
         new Thread(syncTask).start();
     }
 }
-```
