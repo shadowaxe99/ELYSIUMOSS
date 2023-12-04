@@ -1,4 +1,3 @@
-```java
 package networking;
 
 import java.util.concurrent.ExecutorService;
@@ -49,4 +48,3 @@ public class DataSync {
         executorService.shutdown();
     }
 }
-```
