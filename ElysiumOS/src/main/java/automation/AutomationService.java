@@ -1,4 +1,3 @@
-```java
 package automation;
 
 import config.AutomationStationConfig;
@@ -43,4 +42,3 @@ public class AutomationService {
 
     // Additional methods to manage and monitor automations can be added here
 }
-```
