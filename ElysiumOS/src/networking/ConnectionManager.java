@@ -1,4 +1,3 @@
-```java
 package networking;
 
 import java.io.IOException;
@@ -49,4 +48,3 @@ public class ConnectionManager {
     // Additional methods to handle secure data transmission, reconnection strategies,
     // and other advanced networking features can be added here.
 }
-```
