@@ -15,6 +15,9 @@ public class UtilityHelpers {
      * @return A string representing the URL query parameters.
      */
     public static String toQueryString(Map<String, String> params) {
+        if (params == null) {
+            throw new IllegalArgumentException("Parameter 'params' cannot be null.");
+        }
         StringBuilder queryString = new StringBuilder();
         boolean isFirst = true;
 
@@ -38,9 +41,12 @@ public class UtilityHelpers {
      * @return true if the token is valid, false otherwise.
      */
     public static boolean validateUserSessionToken(String userSessionToken) {
-        // Placeholder for session token validation logic
-        // This should interface with the backend services to validate the session token
-        return true; // Assuming the token is valid for the sake of example
+        if (userSessionToken == null || userSessionToken.isEmpty()) {
+            return false;
+        }
+        // Example pseudo-backend request for token validation; replace with actual backend service request
+        boolean isValid = BackendService.validateToken(userSessionToken);
+        return isValid; // Assuming the token is valid for the sake of example
     }
 
     /**
@@ -50,9 +56,12 @@ public class UtilityHelpers {
      * @return The encrypted data.
      */
     public static String encryptData(String data) {
-        // Placeholder for encryption logic
-        // This should use the security module to encrypt the data
-        return data; // Returning the data as is for the sake of example
+        if (data == null) {
+            throw new IllegalArgumentException("Parameter 'data' cannot be null.");
+        }
+        // Example encryption logic; replace with actual encryption implementation
+        String encryptedData = SecurityModule.encrypt(data);
+        return encryptedData;
     }
 
     /**
