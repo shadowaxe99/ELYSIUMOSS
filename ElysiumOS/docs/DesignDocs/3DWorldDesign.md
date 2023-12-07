@@ -34,6 +34,22 @@ The `SceneBuilder` class provides the functionality to construct and manage comp
 ```java
 public class SceneBuilder {
     // Scene construction and management logic
+    
+    /*
+     * Adds an object to the scene.
+     * @param object The object to add.
+     */
+    public void addObject(SceneObject object) {
+        // Add object logic here
+    }
+
+    /*
+     * Removes an object from the scene.
+     * @param object The object to remove.
+     */
+    public void removeObject(SceneObject object) {
+        // Remove object logic here
+    }
 }
 ```
 
@@ -43,6 +59,16 @@ The `AssetManager` is tasked with loading and organizing 3D models, textures, an
 ```java
 public class AssetManager {
     // Asset loading and management logic
+    
+    /*
+     * Loads an asset from a remote server.
+     * @param assetPath The URL path to the asset.
+     * @return The loaded asset.
+     */
+    public Asset loadAssetFromRemote(String assetPath) {
+        // Load asset logic here
+        return new Asset();
+    }
 }
 ```
 

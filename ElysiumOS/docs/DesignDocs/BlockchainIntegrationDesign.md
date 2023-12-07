@@ -15,7 +15,27 @@ The `BlockchainService` class will be responsible for interacting with the Arbit
 
 ```java
 public class BlockchainService {
-    // Methods for blockchain interaction
+    /* 
+     * Method to deploy a smart contract.
+     */
+    public void deployContract(String contractCode, String... constructorArgs) {
+        // Deployment logic here
+    }
+
+    /*
+     * Method to call a function of a deployed smart contract.
+     */
+    public String callContractFunction(String contractAddress, String functionName, String... functionArgs) {
+        // Function calling logic here
+        return "Function output";
+    }
+
+    /*
+     * Method to listen for events from a smart contract.
+     */
+    public void listenToContractEvents(String contractAddress, String eventName) {
+        // Event listening logic here
+    }
 }
 ```
 
