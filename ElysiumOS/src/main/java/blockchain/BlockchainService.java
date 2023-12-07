@@ -24,23 +24,38 @@ public class BlockchainService {
     }
 
     public CompletableFuture<ElysiumToken> deployElysiumTokenContract() {
-        return ElysiumToken.deploy(
-                web3j, credentials, gasProvider,
-                BigInteger.valueOf(1000000), // Initial supply
-                "ElysiumToken", // Token name
-                BigInteger.valueOf(18), // Decimals
-                "ELYS" // Token symbol
-        ).sendAsync();
+        try {
+            return ElysiumToken.deploy(
+                    web3j, credentials, gasProvider,
+                    BigInteger.valueOf(1000000), // Initial supply
+                    "ElysiumToken", // Token name
+                    BigInteger.valueOf(18), // Decimals
+                    "ELYS" // Token symbol
+            ).sendAsync();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return CompletableFuture.failedFuture(e);
+        }
     }
 
     public CompletableFuture<Uint256> getTokenBalance(String contractAddress, String ownerAddress) {
         ElysiumToken token = ElysiumToken.load(contractAddress, web3j, credentials, gasProvider);
-        return token.balanceOf(new Address(ownerAddress)).sendAsync();
+        try {
+            return token.balanceOf(new Address(ownerAddress)).sendAsync();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return CompletableFuture.failedFuture(e);
+        }
     }
 
     public CompletableFuture<String> transferTokens(String contractAddress, String toAddress, BigInteger amount) {
         ElysiumToken token = ElysiumToken.load(contractAddress, web3j, credentials, gasProvider);
-        return token.transfer(new Address(toAddress), new Uint256(amount)).sendAsync();
+        try {
+            return token.transfer(new Address(toAddress), new Uint256(amount)).sendAsync();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return CompletableFuture.failedFuture(e);
+        }
     }
 
     // Additional blockchain-related methods can be added here
