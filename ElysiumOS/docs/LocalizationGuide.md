@@ -42,7 +42,14 @@ The `LanguageManager` class is responsible for loading the appropriate resource 
 The `RegionalSettings` class manages locale-specific formatting for dates, times, numbers, and currencies. It uses the `languageSettings` variable to determine the correct regional format to apply.
 
 ## User Interface
-The user interface elements, such as buttons, menus, and dialogs, are designed to accommodate variable-length text strings that result from translation. The `MainUI.java` and `UIManager.java` classes ensure that the layout dynamically adjusts to different languages.
+The user interface elements, such as buttons, menus, and dialogs, are designed to accommodate variable-length text strings that result from translation. The `MainUI.java` and `UIManager.java` classes ensure that the layout dynamically adjusts to different languages and provides additional functionality:
+
+- **Adaptive Layouts:** The UI layout can adapt to different screen sizes and resolutions, ensuring a consistent user experience across all devices.
+- **Advanced Navigation:** Intuitive navigation systems, such as breadcrumb trails and tabbed interfaces, are integrated to improve user interaction.
+- **Customizable Themes:** Users can select from a variety of themes that change the look and feel of the UI to suit personal preferences or cultural norms.
+- **Interactive Components:** New interactive UI components like sliders, switches, and data pickers provide a more engaging user interface.
+- **Accessibility Enhancements:** The UI includes high-contrast modes, text resizing options, and screen reader support to improve accessibility for all users.
+
 
 ## Accessibility
 Localization also extends to accessibility features, ensuring that they are adapted to the needs of international users. The `AccessibilityFeatures.java` and `AssistiveTechnologies.java` classes are designed with localization in mind.
